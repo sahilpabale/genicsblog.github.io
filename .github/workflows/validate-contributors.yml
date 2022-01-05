@@ -48,6 +48,11 @@ jobs:
         python _scripts/validate-contributors.py ${{ github.event.pull_request.user.login }}
         rm temp.txt
 
+    - name: Push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: git push
+
     - name: Auto-merge if no errors
       if: steps.filter.outputs.contributors == 'true'
       uses: "pascalgn/automerge-action@v0.14.3"
