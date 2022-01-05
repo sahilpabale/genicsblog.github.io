@@ -51,7 +51,10 @@ jobs:
     - name: Push changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: git push
+      run: |
+        git add _contributors
+        git commit -m "Add contributor's page"
+        git push
 
     - name: Auto-merge if no errors
       if: steps.filter.outputs.contributors == 'true'
